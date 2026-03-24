@@ -231,7 +231,7 @@ function library:Notify(options)
 		UI["9"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
 		UI["9"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 		UI["9"]["BackgroundTransparency"] = 1;
-		UI["9"]["Size"] = UDim2.new(0, 100, 0, 20);
+		UI["9"]["Size"] = UDim2.new(0, 190, 0, 20);
 		UI["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		UI["9"]["Text"] = options["Title"];
 		UI["9"]["Name"] = [[Title]];
@@ -278,17 +278,22 @@ function library:Notify(options)
 		-- StarterGui.Notifications.Notifications.NotifyPrompt.DurationBar.UICorner
 		UI["d"] = Instance.new("UICorner", UI["c"]);
 		UI["d"]["CornerRadius"] = UDim.new(1, 0);
-
-		-- StarterGui.Notifications.Notifications.NotifyPrompt.Image
-		UI["e"] = Instance.new("ImageLabel", UI["4"]);
-		UI["e"]["BorderSizePixel"] = 0;
-		UI["e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-		UI["e"]["Image"] = options["Image"];
-		UI["e"]["Size"] = UDim2.new(0, 23, 0, 23);
-		UI["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-		UI["e"]["BackgroundTransparency"] = 1;
-		UI["e"]["Name"] = [[Image]];
-		UI["e"]["Position"] = UDim2.new(1, -224, 0, 3);
+		
+		
+		if options["Image"] then
+			-- StarterGui.Notifications.Notifications.NotifyPrompt.Image
+			UI["e"] = Instance.new("ImageLabel", UI["4"]);
+			UI["e"]["BorderSizePixel"] = 0;
+			UI["e"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+			UI["e"]["Image"] = options["Image"];
+			UI["e"]["Size"] = UDim2.new(0, 23, 0, 23);
+			UI["e"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+			UI["e"]["BackgroundTransparency"] = 1;
+			UI["e"]["Name"] = [[Image]];
+			UI["e"]["Position"] = UDim2.new(1, -224, 0, 3);
+		else
+			UI["9"]["Position"] = UDim2.new(0, 5, 0, 5)
+		end
 
 		if library.IsMobile then
 			local MS = Instance.new("UIScale", UI["4"]) MS.Scale = 0.7 
@@ -569,19 +574,23 @@ function library:CreateWindow(options)
 		tree["8"]["Text"] = options["Name"];
 		tree["8"]["Name"] = [[Title]];
 		tree["8"]["Position"] = UDim2.new(0, 40, 0, 0);
-
-
-		-- StarterGui.UI.Window.Topbar.Logo
-		tree["9"] = Instance.new("ImageLabel", tree["7"]);
-		tree["9"]["BorderSizePixel"] = 0;
-		tree["9"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-		tree["9"]["ImageTransparency"] = 0.3;
-		tree["9"]["Image"] = options["Icon"];
-		tree["9"]["Size"] = UDim2.new(0, 20, 0, 20);
-		tree["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-		tree["9"]["BackgroundTransparency"] = 1;
-		tree["9"]["Name"] = [[Logo]];
-		tree["9"]["Position"] = UDim2.new(0, 13, 0, 0);
+		
+		
+		if options["Icon"] then
+			-- StarterGui.UI.Window.Topbar.Icon
+			tree["9"] = Instance.new("ImageLabel", tree["7"]);
+			tree["9"]["BorderSizePixel"] = 0;
+			tree["9"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+			tree["9"]["ImageTransparency"] = 0.3;
+			tree["9"]["Image"] = options["Icon"];
+			tree["9"]["Size"] = UDim2.new(0, 20, 0, 20);
+			tree["9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+			tree["9"]["BackgroundTransparency"] = 1;
+			tree["9"]["Name"] = [[Icon]];
+			tree["9"]["Position"] = UDim2.new(0, 13, 0, 0);
+		else
+			tree["8"]["Position"] = UDim2.new(0, 15, 0, 0)
+		end
 
 
 		-- StarterGui.UI.Window.Topbar.CloseButton
@@ -1443,23 +1452,25 @@ function library:CreateWindow(options)
 		tree["d6"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
 		tree["d6"]["BackgroundTransparency"] = 1; -- 0.5
 
-
-		-- StarterGui.ScreenGui.LoadingWindow.DiscordTip
-		tree["d7"] = Instance.new("TextLabel", tree["d10"]);
-		tree["d7"]["TextStrokeTransparency"] = 0;
-		tree["d7"]["BorderSizePixel"] = 0;
-		tree["d7"]["TextSize"] = 17;
-		tree["d7"]["TextTransparency"] = 1; -- 0.3
-		tree["d7"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-		tree["d7"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-		tree["d7"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-		tree["d7"]["BackgroundTransparency"] = 1;
-		tree["d7"]["Size"] = UDim2.new(1, 0, 0, 20);
-		tree["d7"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-		tree["d7"]["Text"] = "discord.gg/" .. options["Discord"]["Invite"];
-		tree["d7"]["Name"] = [[DiscordTip]];
-		tree["d7"]["Position"] = UDim2.new(0, 0, 0, 115);
-		tree["d7"]["LayoutOrder"] = 4;
+		
+		if options["Discord"]["Invite"] then
+			-- StarterGui.ScreenGui.LoadingWindow.DiscordTip
+			tree["d7"] = Instance.new("TextLabel", tree["d10"]);
+			tree["d7"]["TextStrokeTransparency"] = 0;
+			tree["d7"]["BorderSizePixel"] = 0;
+			tree["d7"]["TextSize"] = 17;
+			tree["d7"]["TextTransparency"] = 1; -- 0.3
+			tree["d7"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+			tree["d7"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+			tree["d7"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+			tree["d7"]["BackgroundTransparency"] = 1;
+			tree["d7"]["Size"] = UDim2.new(1, 0, 0, 20);
+			tree["d7"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+			tree["d7"]["Text"] = "discord.gg/" .. options["Discord"]["Invite"];
+			tree["d7"]["Name"] = [[DiscordTip]];
+			tree["d7"]["Position"] = UDim2.new(0, 0, 0, 115);
+			tree["d7"]["LayoutOrder"] = 4;
+		end
 
 
 		-- StarterGui.ScreenGui.LoadingWindow.Indicate
@@ -1475,40 +1486,44 @@ function library:CreateWindow(options)
 		tree["d8"]["Position"] = UDim2.new(0, 130, 0, 150);
 
 
-		-- StarterGui.ScreenGui.LoadingWindow.Titletip1
-		tree["d4"] = Instance.new("TextLabel", tree["d10"]);
-		tree["d4"]["TextStrokeTransparency"] = 0.5;
-		tree["d4"]["BorderSizePixel"] = 0;
-		tree["d4"]["TextSize"] = 15;
-		tree["d4"]["TextTransparency"] = 1; -- 0.35
-		tree["d4"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-		tree["d4"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-		tree["d4"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-		tree["d4"]["BackgroundTransparency"] = 1;
-		tree["d4"]["Size"] = UDim2.new(1, 0, 0, 20);
-		tree["d4"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-		tree["d4"]["Text"] = options["LoadingNote"];
-		tree["d4"]["Name"] = [[Titletip1]];
-		tree["d4"]["Position"] = UDim2.new(0, 0, 0, 67);
-		tree["d4"]["LayoutOrder"] = 2;
-
-
-		-- StarterGui.ScreenGui.LoadingWindow.Titletip2
-		tree["d9"] = Instance.new("TextLabel", tree["d10"]);
-		tree["d9"]["TextStrokeTransparency"] = 0.5;
-		tree["d9"]["BorderSizePixel"] = 0;
-		tree["d9"]["TextSize"] = 15;
-		tree["d9"]["TextTransparency"] = 1; -- 0.35
-		tree["d9"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-		tree["d9"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
-		tree["d9"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
-		tree["d9"]["BackgroundTransparency"] = 1;
-		tree["d9"]["Size"] = UDim2.new(1, 0, 0, 20);
-		tree["d9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-		tree["d9"]["Text"] = options["LoadingSubNote"];
-		tree["d9"]["Name"] = [[Titletip2]];
-		tree["d9"]["Position"] = UDim2.new(0, 0, 0, 87);
-		tree["d9"]["LayoutOrder"] = 3;
+		if options["LoadingNote"] then
+			-- StarterGui.ScreenGui.LoadingWindow.Titletip1
+			tree["d4"] = Instance.new("TextLabel", tree["d10"]);
+			tree["d4"]["TextStrokeTransparency"] = 0.5;
+			tree["d4"]["BorderSizePixel"] = 0;
+			tree["d4"]["TextSize"] = 15;
+			tree["d4"]["TextTransparency"] = 1; -- 0.35
+			tree["d4"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+			tree["d4"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+			tree["d4"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+			tree["d4"]["BackgroundTransparency"] = 1;
+			tree["d4"]["Size"] = UDim2.new(1, 0, 0, 20);
+			tree["d4"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+			tree["d4"]["Text"] = options["LoadingNote"];
+			tree["d4"]["Name"] = [[Titletip1]];
+			tree["d4"]["Position"] = UDim2.new(0, 0, 0, 67);
+			tree["d4"]["LayoutOrder"] = 2;
+		end
+		
+		
+		if options["LoadingSubNote"] then 
+			-- StarterGui.ScreenGui.LoadingWindow.Titletip2
+			tree["d9"] = Instance.new("TextLabel", tree["d10"]);
+			tree["d9"]["TextStrokeTransparency"] = 0.5;
+			tree["d9"]["BorderSizePixel"] = 0;
+			tree["d9"]["TextSize"] = 15;
+			tree["d9"]["TextTransparency"] = 1; -- 0.35
+			tree["d9"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+			tree["d9"]["FontFace"] = Font.new([[rbxasset://fonts/families/SourceSansPro.json]], Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+			tree["d9"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
+			tree["d9"]["BackgroundTransparency"] = 1;
+			tree["d9"]["Size"] = UDim2.new(1, 0, 0, 20);
+			tree["d9"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+			tree["d9"]["Text"] = options["LoadingSubNote"];
+			tree["d9"]["Name"] = [[Titletip2]];
+			tree["d9"]["Position"] = UDim2.new(0, 0, 0, 87);
+			tree["d9"]["LayoutOrder"] = 3;	
+		end
 	end
 
 	task.wait(1)
@@ -2066,18 +2081,22 @@ function library:CreateWindow(options)
 			tab["19"]["Name"] = [[Name]];
 			tab["19"]["Position"] = UDim2.new(0, 35, 0, 7);
 
-
-			-- StarterGui.UI.Window.TabButtonHolder.TabButton.Icon
-			tab["1a"] = Instance.new("ImageLabel", tab["17"]);
-			tab["1a"]["BorderSizePixel"] = 0;
-			tab["1a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
-			tab["1a"]["ImageTransparency"] = 0.5;
-			tab["1a"]["Image"] = options["Icon"];
-			tab["1a"]["Size"] = UDim2.new(0, 20, 0, 20);
-			tab["1a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-			tab["1a"]["BackgroundTransparency"] = 1;
-			tab["1a"]["Name"] = [[Icon]];
-			tab["1a"]["Position"] = UDim2.new(0, 10, 0, 5);
+			
+			if options["Icon"] then
+				-- StarterGui.UI.Window.TabButtonHolder.TabButton.Icon
+				tab["1a"] = Instance.new("ImageLabel", tab["17"]);
+				tab["1a"]["BorderSizePixel"] = 0;
+				tab["1a"]["BackgroundColor3"] = Color3.fromRGB(255, 255, 255);
+				tab["1a"]["ImageTransparency"] = 0.5;
+				tab["1a"]["Image"] = options["Icon"];
+				tab["1a"]["Size"] = UDim2.new(0, 20, 0, 20);
+				tab["1a"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
+				tab["1a"]["BackgroundTransparency"] = 1;
+				tab["1a"]["Name"] = [[Icon]];
+				tab["1a"]["Position"] = UDim2.new(0, 10, 0, 5);
+			else
+				tab["19"]["Position"] = UDim2.new(0, tab["17"].Position.X.Offset / 2, 0, 7)
+			end
 
 
 			-- StarterGui.UI.Window.TabButtonHolder.TabButton.Button
