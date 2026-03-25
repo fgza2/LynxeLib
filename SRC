@@ -2174,7 +2174,11 @@ function library:CreateWindow(options)
 
 					tab.Active = true
 					library:tween(tab["19"], {TextTransparency = 0.15})
-					library:tween(tab["1a"], {ImageTransparency = 0.15})
+					
+					if options["Icon"] ~= 0 then
+						library:tween(tab["1a"], {ImageTransparency = 0.15})
+					end
+					
 					library:tween(tab["1c"], {BackgroundTransparency = 0.35})
 					tab["53"].Visible = true
 
@@ -2188,7 +2192,11 @@ function library:CreateWindow(options)
 					tab.Hover = false
 
 					library:tween(tab["19"], {TextTransparency = 0.5})
-					library:tween(tab["1a"], {ImageTransparency = 0.5})
+					
+					if options["Icon"] ~= 0 then
+						library:tween(tab["1a"], {ImageTransparency = 0.5})
+					end
+					
 					library:tween(tab["1c"], {BackgroundTransparency = 1})
 					tab["53"].Visible = false
 				end
@@ -2199,7 +2207,10 @@ function library:CreateWindow(options)
 
 				if not tab.Active then
 					library:tween(tab["19"], {TextTransparency = 0.15})
-					library:tween(tab["1a"], {ImageTransparency = 0.15})
+					
+					if options["Icon"] ~= 0 then
+						library:tween(tab["1a"], {ImageTransparency = 0.15})
+					end
 				end
 			end)
 
@@ -2208,7 +2219,10 @@ function library:CreateWindow(options)
 
 				if not tab.Active then
 					library:tween(tab["19"], {TextTransparency = 0.5})
-					library:tween(tab["1a"], {ImageTransparency = 0.5})
+					
+					if options["Icon"] ~= 0 then
+						library:tween(tab["1a"], {ImageTransparency = 0.5})
+					end
 				end
 			end)
 
