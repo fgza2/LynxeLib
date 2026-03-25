@@ -13,15 +13,15 @@ local lynxe = loadstring(game:HttpGet("https://raw.githubusercontent.com/fgza2/L
 ```lua
 local Window = lynxe:CreateWindow({
 	Name = "Lynxe UI", -- The name of your script / hub
-	Icon = "rbxassetid://10709782497", -- Your logo/icon, set to nil for none
+	Icon = "rbxassetid://10709782497", -- Your logo/icon, set to 0 for none
 
 	UItoggleBind = "P", -- The toggle Key-Bind for PC users
 
 	LynxeUIPrompts = true, -- Lynxe UI notifications
 
 	LoadingTitle = "Title", -- Your loading title
-	LoadingNote = "Note", -- loading note, set to nil for none
-	LoadingSubNote = "SubNote", -- loading SubNote, set to nil for none
+	LoadingNote = "Note", -- loading note, set to 0 for none
+	LoadingSubNote = "SubNote", -- loading SubNote, set to 0 for none
 
 	ConfigSaving = { -- Configuration saving
 		Enabled = false, -- On / Off
@@ -47,7 +47,7 @@ The elements below can be created from the tab or the section, here is an exampl
 
 ## Creating a tab
 ```lua
-local Tab = Window:CreateTab({ Name = "Test Tab", Icon = "rbxassetid://10709782497" }) -- Name, Icon or nil for no icon
+local Tab = Window:CreateTab({ Name = "Test Tab", Icon = "rbxassetid://10709782497" }) -- Name, Icon or 0 for no icon
 ```
 
 
@@ -63,7 +63,7 @@ lynxe:Notify({
 	Title = "Notification", -- The title of your notification
 	Info = "Information", -- The information you want to display
 	Duration = 5, -- How long the notification will last
-	Image = "rbxassetid://10723374276" -- Icon, set to nil for none
+	Image = "rbxassetid://10723374276" -- Icon, set to 0 for none
 })
 ```
 
