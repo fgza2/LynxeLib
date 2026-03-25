@@ -280,7 +280,7 @@ function library:Notify(options)
 		UI["d"]["CornerRadius"] = UDim.new(1, 0);
 		
 		
-		if options["Image"] then
+		if options["Image"] ~= 0 then
 			-- StarterGui.Notifications.Notifications.NotifyPrompt.Image
 			UI["e"] = Instance.new("ImageLabel", UI["4"]);
 			UI["e"]["BorderSizePixel"] = 0;
@@ -576,7 +576,7 @@ function library:CreateWindow(options)
 		tree["8"]["Position"] = UDim2.new(0, 40, 0, 0);
 		
 		
-		if options["Icon"] then
+		if options["Icon"] ~= 0 then
 			-- StarterGui.UI.Window.Topbar.Icon
 			tree["9"] = Instance.new("ImageLabel", tree["7"]);
 			tree["9"]["BorderSizePixel"] = 0;
@@ -1193,7 +1193,6 @@ function library:CreateWindow(options)
 		tree["40"] = Instance.new("UICorner", tree["3f"]);
 
 
-
 		-- StarterGui.UI.Window.SettingsPage.Content.Hotkey.Key.UIStroke
 		tree["41"] = Instance.new("UIStroke", tree["3f"]);
 		tree["41"]["Thickness"] = 0.7;
@@ -1453,7 +1452,7 @@ function library:CreateWindow(options)
 		tree["d6"]["BackgroundTransparency"] = 1; -- 0.5
 
 		
-		if options["Discord"]["Invite"] then
+		if options["Discord"]["Invite"] ~= "NoInvite" then
 			-- StarterGui.ScreenGui.LoadingWindow.DiscordTip
 			tree["d7"] = Instance.new("TextLabel", tree["d10"]);
 			tree["d7"]["TextStrokeTransparency"] = 0;
@@ -1486,7 +1485,7 @@ function library:CreateWindow(options)
 		tree["d8"]["Position"] = UDim2.new(0, 130, 0, 150);
 
 
-		if options["LoadingNote"] then
+		if options["LoadingNote"] ~= 0 then
 			-- StarterGui.ScreenGui.LoadingWindow.Titletip1
 			tree["d4"] = Instance.new("TextLabel", tree["d10"]);
 			tree["d4"]["TextStrokeTransparency"] = 0.5;
@@ -1506,7 +1505,7 @@ function library:CreateWindow(options)
 		end
 		
 		
-		if options["LoadingSubNote"] then 
+		if options["LoadingSubNote"] ~= 0 then 
 			-- StarterGui.ScreenGui.LoadingWindow.Titletip2
 			tree["d9"] = Instance.new("TextLabel", tree["d10"]);
 			tree["d9"]["TextStrokeTransparency"] = 0.5;
@@ -2082,7 +2081,7 @@ function library:CreateWindow(options)
 			tab["19"]["Position"] = UDim2.new(0, 35, 0, 7);
 
 			
-			if options["Icon"] then
+			if options["Icon"] ~= 0 then
 				-- StarterGui.UI.Window.TabButtonHolder.TabButton.Icon
 				tab["1a"] = Instance.new("ImageLabel", tab["17"]);
 				tab["1a"]["BorderSizePixel"] = 0;
