@@ -2094,7 +2094,7 @@ function library:CreateWindow(options)
 				tab["1a"]["Name"] = [[Icon]];
 				tab["1a"]["Position"] = UDim2.new(0, 10, 0, 5);
 			else
-				tab["19"]["Position"] = UDim2.new(0, tab["17"].Position.X.Offset / 2, 0, 7)
+				tab["19"]["Position"] = UDim2.new(0, 25, 0, 7)
 			end
 
 
