@@ -117,57 +117,6 @@ end
 library["Lynxe.Main"] = Instance.new("Folder", RunService:IsStudio() and Players.LocalPlayer:WaitForChild("PlayerGui") or CoreGui);
 library["Lynxe.Main"]["Name"] = "Lynxe.Main";
 
--- Scroll detection for mobile
-local scrollDetection = {
-	isScrolling = false,
-	touchStartPos = nil,
-	touchStartTime = nil,
-	scrollThreshold = 10, -- pixels of movement before considered a scroll
-	tapThreshold = 0.15, -- seconds before a touch is considered a hold
-}
-
--- Track touch input for scroll detection
-if library.IsMobile then
-	UserInputService.TouchStarted:Connect(function(input, processed)
-		if processed then return end
-		scrollDetection.touchStartPos = input.Position
-		scrollDetection.touchStartTime = tick()
-		scrollDetection.isScrolling = false
-	end)
-	
-	UserInputService.TouchMoved:Connect(function(input, processed)
-		if processed then return end
-		if scrollDetection.touchStartPos then
-			local delta = (input.Position - scrollDetection.touchStartPos).Magnitude
-			if delta > scrollDetection.scrollThreshold then
-				scrollDetection.isScrolling = true
-			end
-		end
-	end)
-	
-	UserInputService.TouchEnded:Connect(function(input, processed)
-		if processed then return end
-		-- Reset after a small delay to prevent immediate clicks after scroll
-		task.wait(0.05)
-		scrollDetection.isScrolling = false
-		scrollDetection.touchStartPos = nil
-		scrollDetection.touchStartTime = nil
-	end)
-end
-
--- Helper function to check if touch is a valid tap (not a scroll)
-local function isValidTap(input)
-	if not library.IsMobile then return true end
-	if scrollDetection.isScrolling then return false end
-	if scrollDetection.touchStartPos then
-		local delta = (input.Position - scrollDetection.touchStartPos).Magnitude
-		if delta > scrollDetection.scrollThreshold then
-			return false
-		end
-	end
-	return true
-end
-
 -- library functions, logic, methods
 function library:validate(defaults, options)
 	for i, v in pairs(defaults) do
@@ -432,7 +381,7 @@ function library:CreateWindow(options)
 
 		-- StarterGui.UI.Window.UICorner
 		tree["3"] = Instance.new("UICorner", tree["2"]);
-		tree["3"]["CornerRadius"] = UDim.new(0, 0.35);
+		tree["3"]["CornerRadius"] = UDim.new(0, 0.4);
 
 		-- StarterGui.UI.Window.UIStroke
 		tree["4"] = Instance.new("UIStroke", tree["2"]);
@@ -2462,9 +2411,6 @@ function library:CreateWindow(options)
 						--if gpe then return end
 
 						if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and button.Hover then
-							if input.UserInputType == Enum.UserInputType.Touch and not isValidTap(input) then
-								return
-							end
 							button.MouseDown = true
 							options.Callback()
 							TweenService:Create(button["60"], TweenInfo.new(0.1), {BackgroundTransparency = 0.95}):Play()
@@ -2647,9 +2593,6 @@ function library:CreateWindow(options)
 
 					NewConnection(UserInputService, "InputBegan", function(input)
 						if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and toggle.Hover then
-							if input.UserInputType == Enum.UserInputType.Touch and not isValidTap(input) then
-								return
-							end
 							toggle.MouseDown = true
 							toggle:set()
 							TweenService:Create(toggle["68"], TweenInfo.new(0.1), {BackgroundTransparency = 0.95}):Play()
@@ -2891,9 +2834,7 @@ function library:CreateWindow(options)
 					NewConnection(UserInputService, "InputBegan", function(input, gpe)
 
 						if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and slider.Hover then
-							if input.UserInputType == Enum.UserInputType.Touch and not isValidTap(input) then
-								return
-							end
+
 							slider.MouseDown = true
 							local currentInputType = input.UserInputType
 
@@ -3060,9 +3001,6 @@ function library:CreateWindow(options)
 
 				NewConnection(UserInputService, "InputBegan", function(input)
 					if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and keybindB.Hover then
-						if input.UserInputType == Enum.UserInputType.Touch and not isValidTap(input) then
-							return
-						end
 						keybindB.MouseDown = true
 						keybindB:set()
 						TweenService:Create(keybindB["c2"], TweenInfo.new(0.1), {BackgroundTransparency = 0.95}):Play()
@@ -3360,9 +3298,6 @@ function library:CreateWindow(options)
 
 					NewConnection(UserInputService, "InputBegan", function(input)
 						if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and dropdownOption.Hover then
-							if input.UserInputType == Enum.UserInputType.Touch and not isValidTap(input) then
-								return
-							end
 							dropdownOption.MouseDown = true
 							TweenService:Create(dropdown[keyPrefix], TweenInfo.new(0.1), {BackgroundTransparency = 0.95}):Play()
 
@@ -3434,9 +3369,6 @@ function library:CreateWindow(options)
 
 				NewConnection(UserInputService, "InputBegan", function(input)
 					if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and dropdown.Hover then
-						if input.UserInputType == Enum.UserInputType.Touch and not isValidTap(input) then
-							return
-						end
 						dropdown.MouseDown = true
 						TweenService:Create(dropdown["80"], TweenInfo.new(0.1), {BackgroundTransparency = 0.95}):Play()
 						dropdown:activated()
@@ -3569,9 +3501,6 @@ function library:CreateWindow(options)
 					--if gpe then return end
 
 					if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and button.Hover then
-						if input.UserInputType == Enum.UserInputType.Touch and not isValidTap(input) then
-							return
-						end
 						button.MouseDown = true
 						options.Callback()
 						TweenService:Create(button["60"], TweenInfo.new(0.1), {BackgroundTransparency = 0.95}):Play()
@@ -3754,9 +3683,6 @@ function library:CreateWindow(options)
 
 				NewConnection(UserInputService, "InputBegan", function(input)
 					if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and toggle.Hover then
-						if input.UserInputType == Enum.UserInputType.Touch and not isValidTap(input) then
-							return
-						end
 						toggle.MouseDown = true
 						toggle:set()
 						TweenService:Create(toggle["68"], TweenInfo.new(0.1), {BackgroundTransparency = 0.95}):Play()
@@ -4000,9 +3926,7 @@ function library:CreateWindow(options)
 				NewConnection(UserInputService, "InputBegan", function(input, gpe)
 
 					if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and slider.Hover then
-						if input.UserInputType == Enum.UserInputType.Touch and not isValidTap(input) then
-							return
-						end
+
 						slider.MouseDown = true
 						local currentInputType = input.UserInputType
 
@@ -4169,9 +4093,6 @@ function library:CreateWindow(options)
 
 			NewConnection(UserInputService, "InputBegan", function(input)
 				if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and keybindB.Hover then
-					if input.UserInputType == Enum.UserInputType.Touch and not isValidTap(input) then
-						return
-					end
 					keybindB.MouseDown = true
 					keybindB:set()
 					TweenService:Create(keybindB["c2"], TweenInfo.new(0.1), {BackgroundTransparency = 0.95}):Play()
@@ -4468,9 +4389,6 @@ function library:CreateWindow(options)
 
 				NewConnection(UserInputService, "InputBegan", function(input)
 					if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and dropdownOption.Hover then
-						if input.UserInputType == Enum.UserInputType.Touch and not isValidTap(input) then
-							return
-						end
 						dropdownOption.MouseDown = true
 						TweenService:Create(dropdown[keyPrefix], TweenInfo.new(0.1), {BackgroundTransparency = 0.95}):Play()
 
@@ -4541,11 +4459,8 @@ function library:CreateWindow(options)
 
 			NewConnection(UserInputService, "InputBegan", function(input)
 				if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) and dropdown.Hover then
-					if input.UserInputType == Enum.UserInputType.Touch and not isValidTap(input) then
-						return
-					end
 					dropdown.MouseDown = true
-						TweenService:Create(dropdown["80"], TweenInfo.new(0.1), {BackgroundTransparency = 0.95}):Play()
+					TweenService:Create(dropdown["80"], TweenInfo.new(0.1), {BackgroundTransparency = 0.95}):Play()
 					dropdown:activated()
 				end
 			end)
